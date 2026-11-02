@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__NAME__</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand" id="brand">__NAME__</div>
+  <div id="who" class="who"></div>
+  <div id="dsbadge" class="badge" title="현재 적용된 데이터셋"></div>
+  <button id="logout" class="btn ghost hidden">로그아웃</button>
+</header>
+<main id="view"></main>
+
+<template id="t-login">
+  <section class="card narrow">
+    <h2>로그인</h2>
+    <p class="muted">운영자 계정 또는 사용자 아이디 + 공통 비밀번호</p>
+    <form id="f-login" class="form">
+      <label>아이디 <input name="username" autocomplete="username" required></label>
+      <label>비밀번호 <input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="btn primary">들어가기</button>
+      <div id="login-err" class="err"></div>
+    </form>
+  </section>
+</template>
+
+<template id="t-operator">
+  <nav class="tabs">
+    <button data-tab="data" class="active">데이터셋</button>
+    <button data-tab="run">실행</button>
+    <button data-tab="result">결과</button>
+    <button data-tab="export">내보내기 / 검증</button>
+  </nav>
+  <div id="stale" class="notice hidden"></div>
+  <section data-pane="data" class="pane">
+    <div class="card">
+      <h2>데이터셋 선택 · 검증 · 적용 <span class="muted small">(업로드 없음 — <code>data/datasets/&lt;이름&gt;/</code> 폴더에서 선택)</span></h2>
+      <table class="tbl" id="ds-table"><thead><tr><th>이름</th><th>경로</th><th>파일</th><th>메모</th><th>상태</th><th></th></tr></thead><tbody></tbody></table>
+      <div id="ds-result" class="result"></div>
+    </div>
+  </section>
+  <section data-pane="run" class="pane hidden">
+    <div class="card">
+      <h2>조건 입력 → 생성 (재계산)</h2>
+      <form id="f-run" class="grid"></form>
+      <div class="row"><button class="btn primary" id="btn-run">생성</button> <span id="run-status" class="muted"></span></div>
+      <div id="run-view" class="result"></div>
+    </div>
+  </section>
+  <section data-pane="result" class="pane hidden">
+    <div class="card">
+      <div class="row filters" id="res-filters"></div>
+      <div id="res-view"></div>
+    </div>
+  </section>
+  <section data-pane="export" class="pane hidden">
+    <div class="card">
+      <h2>결과 내보내기 (JSON) · 규칙 검증</h2>
+      <p class="muted small">파일 선택창을 열지 않습니다. 서버 <code>exports/</code> 폴더에 저장되고 아래에 표시됩니다 (복사 가능).</p>
+      <div class="row"><button class="btn primary" id="btn-export">내보내기</button> <button class="btn" id="btn-copy">JSON 복사</button> <button class="btn" id="btn-verify">규칙 검증 실행</button> <span id="exp-status" class="muted"></span></div>
+      <textarea id="exp-json" rows="14" readonly spellcheck="false"></textarea>
+      <div id="verify-result" class="result"></div>
+    </div>
+  </section>
+</template>
+
+<template id="t-user">
+  <section class="card">
+    <div class="row filters" id="u-filters"></div>
+    <div id="u-view"></div>
+  </section>
+</template>
+
+<script src="/app.js"></script>
+</body>
+</html>
