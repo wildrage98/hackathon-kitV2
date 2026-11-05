@@ -2,7 +2,7 @@
 """preflight.py — 환경 점검 + 제출 전 점검 (stdlib only, Python 3.8+).
 
   python3 tools/preflight.py env                       # 파이썬·패키지·소켓·쓰기권한·git
-  python3 tools/preflight.py submit --project <폴더>    # 제출 10분 전: 필수 파일·로그 증거·비밀키·테스트 실행 여부
+  python3 tools/preflight.py submit --project <폴더>    # 제출 10분 전: 필수 파일·로그 증거·비밀키·테스트 실행 여부·확인 문제 훅(서비스형)
   python3 tools/preflight.py all --project <폴더>
 
 --project 를 생략하면 현재 폴더에 src/ 가 있으면 현재 폴더, 없으면 src/main.py 를 가진 하위 폴더가 하나뿐일 때 그 폴더.
@@ -260,9 +260,26 @@ def submit_checks(project=None, required=("README.md",), test_cmd=None):
                 continue
             txt = open(path, encoding="utf-8", errors="ignore").read()
             blanks = re.findall(r"^\((?:답변|무엇을|사용한|필요한|실행|기본|테스트|판단|현상|경계값|AI 첫)[^\n]*\)$", txt, re.M)
-            check("%s 양식 빈칸 없음" % name, not blanks, "남은 안내문 %d개" % len(blanks))
+            n_blank = len(blanks) + txt.count("(채움")
+            check("%s 양식 빈칸 없음" % name, n_blank == 0, "남은 안내문·(채움 %d개" % n_blank)
             if name == "HOW_TO_RUN.md":
                 check("HOW_TO_RUN 실행 명령", bool(re.search(r"(python3?|bash|docker|npm|node)\s+\S+", txt)))
+                # 확인 문제(제출 후 6문항) 출처가 되는 굵은 소제목 6개 — tools/quiz_prep.py 와 같은 판정
+                try:
+                    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+                    import quiz_prep  # noqa: E402
+                    hs = quiz_prep.hook_status(txt)
+                    missing = [n for n, st, _ in hs if st != "채움"]
+                    check("HOW_TO_RUN 확인 문제 훅 6개", not missing, ("비어 있음: " + ", ".join(missing)) if missing else "구조 선택·모듈과 상태·잘못된 입력·설계 기준·조건을 바꾸면·검증함/가정함/미구현")
+                except Exception as e:  # noqa: BLE001
+                    warn("확인 문제 훅", "quiz_prep.py 없음 (%r)" % e)
+        qz = os.path.join("docs", "QUIZ.md")
+        if os.path.exists(qz):
+            qt = open(qz, encoding="utf-8", errors="ignore").read()
+            nq, nph = len(re.findall(r"^## Q\d", qt, re.M)), qt.count("(채움")
+            check("확인 문제 답안 docs/QUIZ.md", nq >= 6 and nph == 0, "답 %d개, (채움 %d — prompts/09-quiz.md" % (nq, nph))
+        else:
+            warn("docs/QUIZ.md", "없음 — 제출 후 확인 문제 6문항 대비 (tools/quiz_prep.py → prompts/09-quiz.md)")
         if os.path.exists("docs/README_ORIGINAL.sha256") and os.path.exists("README.md"):
             want = open("docs/README_ORIGINAL.sha256", encoding="utf-8").read().split()[0]
             got = hashlib.sha256(open("README.md", "rb").read()).hexdigest()
