@@ -30,7 +30,7 @@
 170-180  preflight submit → 제출
 ```
 
-I 형 시간표는 [09-service.md](09-service.md) §순서. 뼈대: `bash tools/new_webapp.sh <이름> --data <CSV폴더>` (A~H 는 `new_project.sh`).
+I 형 시간표는 [09-service.md](09-service.md) §순서, 분 단위 전체 순서는 [RUNBOOK.md](RUNBOOK.md). 뼈대: `bash tools/new_webapp.sh <이름> --data <CSV폴더>` (A~H 는 `new_project.sh`).
 
 ## 2. 유형 × 모듈
 
@@ -72,6 +72,7 @@ I 형: 읽기·검증 csvschema → 저장 dbcore → 계산 vrp(배정·묶음�
 | 파일 업로드·저장창 금지 | 서버 폴더에서 선택 / 서버 폴더에 저장 + 화면 표시 |
 | Docker 빌드 | pip 없는 stdlib. 빌드 확인 불가면 Dockerfile 문법만 점검, HOW_TO_RUN 에 명시 |
 | 첫 계산 결과가 현행 대비 자원 2배 초과 | 기준 숫자(우회 배수·도보 한도·최소 인원) 비교 실험 10분 |
+| 제출 후 확인 문제(6문항×5분, 복사 불가) | 질문은 내 문서에서 생성 → HOW_TO_RUN 굵은 소제목 6개 채움 → `tools/quiz_prep.py` → `prompts/09` → docs/QUIZ.md 암기 (essay-prep) |
 
 ## 4. 금지
 
@@ -84,7 +85,7 @@ I 형: 읽기·검증 csvschema → 저장 dbcore → 계산 vrp(배정·묶음�
 
 ```
 EXAM-DAY.md
-playbook/README.md  stakeholder-interview.md  essay-prep.md  codex-tactics.md  01~09
+playbook/RUNBOOK.md (분 단위 순서표 — 처음이면 이것만)  README.md  stakeholder-interview.md  essay-prep.md (확인 문제 6유형)  codex-tactics.md  01~09
 scaffold/webapp/  (new_webapp.sh 가 복사)
 prompts/00~07
 examples/  kitlib/

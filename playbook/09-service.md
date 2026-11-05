@@ -24,9 +24,12 @@
 60-100  계산 품질(기준 반영, 지표) → 운영 조건 재계산 → 사용자 화면
 100     체크포인트: REQUIREMENTS 상태 열 전부 채워졌나 → 없는 것부터
 100-130 내보내기(스키마) → 변형 데이터셋(정상 1·오류 3) → stale 동작 → 테스트
-130-155 Dockerfile·.env.example·헬스체크 확인 → HOW_TO_RUN(양식 그대로) → AI_COLLABORATION
-155-170 preflight submit → prompts/06·07 → DECISIONS 통독
+130-150 Dockerfile·.env.example·헬스체크 확인 → VERIFICATION
+150-165 HOW_TO_RUN(양식 그대로 + 굵은 소제목 6개) → AI_COLLABORATION(정책 이름·수용/수정/폐기·근거) → prompts/07
+165-174 tools/quiz_prep.py → prompts/09 → docs/QUIZ.md 암기
+174-180 preflight submit → 커밋 → 제출 → 확인 문제 6문항 (essay-prep)
 ```
+분 단위 전체 순서: `playbook/RUNBOOK.md`.
 
 ## 최소 실행본 (30분)
 scaffold + specs.py + engine.run 이 "규칙을 지키는 아무 답" 하나를 내고 verify 가 통과 → 화면에 지표 1개. 최적화는 그 다음.
