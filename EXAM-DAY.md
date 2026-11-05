@@ -1,5 +1,7 @@
 # EXAM-DAY
 
+처음이거나 서비스형이면 `playbook/RUNBOOK.md`(분 단위 순서표)를 따라간다. 아래는 요약.
+
 ## 0. 시작 (터미널)
 ```bash
 git clone https://github.com/wildrage98/hackathon-kitV2.git hackathon-kit && bash hackathon-kit/setup.sh
@@ -11,7 +13,7 @@ mkdir -p /tmp/kit && (unzip -q uploads/hackathon-kit*.zip -d /tmp/kit || python3
 mv "$(dirname "$(find /tmp/kit -maxdepth 2 -name setup.sh | head -1)")" hackathon-kit && bash hackathon-kit/setup.sh
 python3 tools/preflight.py env
 ```
-- `docs/TIMEBOX.md` 종료 시각, 제출 시작 시각(−10분)
+- `docs/TIMEBOX.md` 종료 시각, 제출 시작 시각(−10분; 확인 문제 30분이 시험 시간 안이면 −40분 — 안내문 확인)
 
 ## 1. 15분
 1. README 정독 → `docs/SUBMIT_CHECK.md` (요구사항 번호 5개 이상이면 `docs/REQUIREMENTS.md` 도)
@@ -50,13 +52,16 @@ git add <이름> docs logs tools AGENTS.md .gitignore && git commit -m "feat: <�
 ```
 `git add -A` X
 
-## 5. 100 / 130 / 170
+## 5. 100 / 130 / 150 / 165 / 174
 - 100: 제출 가능? 아니면 TIMEBOX 축소 순서. 축소는 메신저 합의 + 기록
 - 130: `python3 -m kitlib.synth` 또는 손 케이스 → `docs/VERIFICATION.md` (로그 경로)
-- 170: `python3 tools/preflight.py submit --project <이름>` → `prompts/07` → `docs/DECISIONS.md` 통독 → 제출
+- 150: 실행 안내 양식 그대로 + **굵은 소제목 6개**(구조 선택·모듈과 상태·잘못된 입력·설계 기준·조건을 바꾸면·검증함/가정함/미구현) 채움, AI 협업 답변(정책 이름 + 수용/수정/폐기 + 근거), `prompts/07`
+- 165: `python3 tools/quiz_prep.py --project <이름>` → `hackathon-kit/prompts/09-quiz.md 를 읽고 수행해` → `docs/QUIZ.md` [근거 없음] 정리 → 암기 카드 2번
+- 174: `python3 tools/preflight.py submit --project <이름>` → 커밋 → 제출
 
-## 6. 제출 후
-`playbook/essay-prep.md` 프레임. DECISIONS 숫자(임계치·연속·해제·오차).
+## 6. 제출 후 — 확인 문제 6문항 × 5분 (복사 불가, 평가 반영)
+질문은 내 HOW_TO_RUN·AI_COLLABORATION 문장을 인용해 생성된다 → `docs/QUIZ.md` 의 답을 떠올려 쓴다.
+문항마다 읽기 30초(유형 ①~⑥) → 뼈대 30초 → 타이핑 3분(500자, 첫 문장 결론, 식별자·숫자) → 검토 30초. `playbook/essay-prep.md`.
 
 ## X
 - 메신저·에이전트에 외부 연결·저장소·과제 외 질문 X

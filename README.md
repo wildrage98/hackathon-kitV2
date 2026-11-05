@@ -10,17 +10,17 @@ bash tools/new_webapp.sh <이름> --data <CSV폴더>       # 서비스형 (웹+�
 ```
 
 ```
-EXAM-DAY.md          순서표
+EXAM-DAY.md          순서표 (요약) · playbook/RUNBOOK.md 분 단위 순서표
 AGENTS.md            에이전트 작업 규칙
 setup.sh             설치 (AGENTS.md, skills/, kitlib/, templates→docs/, scripts→tools/, .gitignore)
 kitlib/              stdlib 전용 모듈 24개 (각 파일 머리말에 API)
 scaffold/webapp/     서비스형 뼈대 (new_webapp.sh 가 복사: 로그인·역할·데이터셋 검증/적용·실행·결과·내보내기·헬스체크·Dockerfile)
-playbook/            유형별 체크리스트 01~09, 인터뷰, 질문 목록, 에이전트 운용
-prompts/             단계별 프롬프트 00~08
+playbook/            RUNBOOK(분 단위 순서표), 유형별 체크리스트 01~09, 인터뷰, 확인 문제 대비(essay-prep), 에이전트 운용
+prompts/             단계별 프롬프트 00~09 (09 = 제출 후 확인 문제 답안 초안)
 examples/            배선 예시 2개 (참고용)
-templates/           docs/ 양식 8개
-scripts/             preflight, profile_csv, new_project, new_webapp, run_and_log, smoke
-skills/              plan-verify, decision-log, scaffold-web, rule-check, heuristic-opt, ship-check
+templates/           docs/ 양식 9개 (QUIZ = 확인 문제 답안)
+scripts/             preflight, quiz_prep(문서 훅 점검·암기 재료), profile_csv, new_project, new_webapp, run_and_log, smoke
+skills/              plan-verify, decision-log, scaffold-web, rule-check, heuristic-opt, ship-check, quiz-prep
 tests/               kitlib 테스트 (python -m unittest discover -s tests)
 ```
 

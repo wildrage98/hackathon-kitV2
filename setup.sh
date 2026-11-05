@@ -58,13 +58,13 @@ for f in "$KIT"/templates/*.md; do
     cp "$f" "$ROOT/docs/$base"
   fi
 done
-echo "[kit] docs/ 양식 설치 (TIMEBOX, QUESTIONS, AGREEMENT, PLAN, DECISIONS, VERIFICATION, SUBMIT_CHECK)"
+echo "[kit] docs/ 양식 설치 (TIMEBOX, QUESTIONS, AGREEMENT, PLAN, DECISIONS, VERIFICATION, SUBMIT_CHECK, REQUIREMENTS, QUIZ)"
 
 # 5. 도구
 mkdir -p "$ROOT/tools"
 cp "$KIT"/scripts/*.sh "$KIT"/scripts/*.py "$ROOT/tools/"
 chmod +x "$ROOT/tools/"*.sh "$ROOT/tools/"*.py
-echo "[kit] tools/ 설치 (run_and_log.sh, smoke.sh, new_project.sh, new_webapp.sh, preflight.py, profile_csv.py)"
+echo "[kit] tools/ 설치 (run_and_log.sh, smoke.sh, new_project.sh, new_webapp.sh, preflight.py, quiz_prep.py, profile_csv.py)"
 
 # 6. .gitignore — kit 폴더·캐시는 커밋에서 제외. 작업 루트가 홈이면 도구 상태/캐시 폴더도 제외
 GI="$ROOT/.gitignore"
