@@ -58,7 +58,7 @@ for f in "$KIT"/templates/*.md; do
     cp "$f" "$ROOT/docs/$base"
   fi
 done
-echo "[kit] docs/ 양식 설치 (TIMEBOX, QUESTIONS, AGREEMENT, PLAN, DECISIONS, VERIFICATION, SUBMIT_CHECK, REQUIREMENTS, QUIZ)"
+echo "[kit] docs/ 양식 설치 (TIMEBOX, QUESTIONS, AGREEMENT, PLAN, DECISIONS, VERIFICATION, SUBMIT_CHECK, REQUIREMENTS, QUIZ, PITCH)"
 
 # 5. 도구
 mkdir -p "$ROOT/tools"
